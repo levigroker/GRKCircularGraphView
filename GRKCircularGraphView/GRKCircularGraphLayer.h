@@ -53,7 +53,7 @@
 /**
  *  The fill direction of the graph.
  *  Defaults to `YES`, meaning the represented value will be the percentage of the circle from startAngle to the value in a clockwise direction.
- *  i.e. if the `percent` is `0.25` and the `startAngle` is `-M_PI_2` (12:00 o'clock), then the graph will be filled from 12:00 to 3:00.
+ *  i.e. if the `percent` is `0.25` and the `startAngle` is `M_PI_2 * 3 (12:00 o'clock), then the graph will be filled from 12:00 to 3:00.
  *  If `NO` in the same situation, then the graph would be filled from 12:00 to 9:00.
  */
 @property (nonatomic,assign) BOOL clockwise;
