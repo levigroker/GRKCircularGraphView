@@ -24,12 +24,19 @@
 @property (nonatomic,weak) IBOutlet UILabel *percentLabel;
 @property (nonatomic,weak) IBOutlet UILabel *dimensionsLabel;
 @property (nonatomic,weak) IBOutlet UIButton *defaultColorButton;
+@property (nonatomic,weak) IBOutlet UIButton *clearColorButton;
+@property (nonatomic,weak) IBOutlet UIButton *redColorButton;
+@property (nonatomic,weak) IBOutlet UIButton *orangeColorButton;
+@property (nonatomic,weak) IBOutlet UIButton *yellowColorButton;
+@property (nonatomic,weak) IBOutlet UIButton *greenColorButton;
+@property (nonatomic,weak) IBOutlet UIButton *blueColorButton;
+@property (nonatomic,weak) IBOutlet UIButton *purpleColorButton;
+@property (nonatomic,weak) IBOutlet UISegmentedControl *colorSegmentedControl;
 
 @property (nonatomic,weak) IBOutlet NSLayoutConstraint *widthConstraint;
 @property (nonatomic,weak) IBOutlet NSLayoutConstraint *heightConstraint;
 
-@property (nonatomic,strong) UIView *tintColorSelectionView;
-@property (nonatomic,strong) UIView *fillColorSelectionView;
+@property (nonatomic,strong) UIView *colorSelectionView;
 
 - (IBAction)startAngleSliderValueChanged:(UISlider *)sender;
 - (IBAction)widthSliderValueChanged:(UISlider *)sender;
@@ -38,8 +45,8 @@
 - (IBAction)clockwiseSwitchValueChanged:(UISwitch *)sender;
 - (IBAction)animateSwitchValueChanged:(UISwitch *)sender;
 - (IBAction)useTinitColorSwitchValueChanged:(UISwitch *)sender;
-- (IBAction)tintColorAction:(UIButton *)sender;
-- (IBAction)fillColorAction:(UIButton *)sender;
+- (IBAction)colorAction:(UIButton *)sender;
+- (IBAction)colorSegmentedContrtolValueChanged:(UISegmentedControl *)sender;
 
 @end
 
@@ -49,13 +56,24 @@
 {
     [super viewDidLoad];
     
+    //Rotate our height slider
     UISlider *heightSlider = self.heightSlider;
     [heightSlider removeFromSuperview];
     [heightSlider removeConstraints:self.view.constraints];
     heightSlider.translatesAutoresizingMaskIntoConstraints = YES;
     heightSlider.transform = CGAffineTransformMakeRotation(-M_PI_2);
     [self.view addSubview:heightSlider];
-    [self colorAction:YES sender:self.defaultColorButton];
+
+    //Setup the selection view
+    self.colorSelectionView = [[UIView alloc] init];
+    self.colorSelectionView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.colorSelectionView.backgroundColor = [UIColor blackColor];
+    UIView *subview = [[UIView alloc] init];
+    subview.backgroundColor = self.view.backgroundColor;
+    subview.translatesAutoresizingMaskIntoConstraints = NO;
+    [self.colorSelectionView addSubview:subview];
+    [self.colorSelectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-1-[subview]-1-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(subview)]];
+    [self.colorSelectionView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-1-[subview]-1-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(subview)]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -70,6 +88,7 @@
     [self updatePercentLabel];
     [self widthSliderValueChanged:self.widthSlider];
     [self heightSliderValueChanged:self.heightSlider];
+    [self updateSelectedColor];
 }
 
 #pragma mark - Actions
@@ -117,66 +136,94 @@
 
 - (IBAction)useTinitColorSwitchValueChanged:(UISwitch *)sender
 {
-    if (sender.on)
-    {
-        [self.fillColorSelectionView removeFromSuperview];
-        self.fillColorSelectionView = nil;
-    }
-
     self.graphView.indicatorColorUsesTintColor = sender.on;
+    [self updateSelectedColor];
 }
 
-- (IBAction)tintColorAction:(UIButton *)sender
+- (IBAction)colorAction:(UIButton *)sender;
 {
-    [self colorAction:YES sender:sender];
-}
-
-- (IBAction)fillColorAction:(UIButton *)sender
-{
-    [self colorAction:NO sender:sender];
-}
-
-- (void)colorAction:(BOOL)tint sender:(UIButton *)sender
-{
-    UIView *view = tint ? self.tintColorSelectionView : self.fillColorSelectionView;
     UIColor *color = sender.tag == 1 ? [UIColor clearColor] : sender.backgroundColor;
-    
-    [view removeFromSuperview];
-    view = [[UIView alloc] init];
-    view.translatesAutoresizingMaskIntoConstraints = NO;
-    view.backgroundColor = [UIColor blackColor];
-    [self.view insertSubview:view belowSubview:sender];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:sender attribute:NSLayoutAttributeHeight multiplier:1.0f constant:2.0f]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:sender attribute:NSLayoutAttributeWidth multiplier:1.0f constant:2.0f]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:sender attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:view attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:sender attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
-    UIView *subview = [[UIView alloc] init];
-    subview.backgroundColor = self.view.backgroundColor;
-    subview.translatesAutoresizingMaskIntoConstraints = NO;
-    [view addSubview:subview];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-1-[subview]-1-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(subview)]];
-    [view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-1-[subview]-1-|" options:0 metrics:nil views:NSDictionaryOfVariableBindings(subview)]];
 
-    if (tint)
-    {
-        self.tintColorSelectionView = view;
-        self.graphView.tintColor = color;
-        if (self.graphView.indicatorColorUsesTintColor)
-        {
-            [self.fillColorSelectionView removeFromSuperview];
-            self.fillColorSelectionView = nil;
-        }
+    switch (self.colorSegmentedControl.selectedSegmentIndex) {
+        case 0: //Tint Color
+            self.graphView.tintColor = color;
+            break;
+        case 1: //Bar Color
+            self.graphView.indicatorColor = color;
+            [self.tintColorSwitch setOn:NO animated:YES];
+            [self useTinitColorSwitchValueChanged:self.tintColorSwitch];
+            break;
+        default: //Fill Color
+            self.graphView.fillColor = color;
+            break;
     }
-    else
-    {
-        self.fillColorSelectionView = view;
-        self.graphView.indicatorColor = color;
-        [self.tintColorSwitch setOn:NO animated:YES];
-        [self useTinitColorSwitchValueChanged:self.tintColorSwitch];
-    }
+
+    [self updateSelectedColor];
+}
+
+- (IBAction)colorSegmentedContrtolValueChanged:(UISegmentedControl *)sender
+{
+    [self updateSelectedColor];
 }
 
 #pragma mark - Helpers
+
+- (void)updateSelectedColor
+{
+    UIView *view = nil;
+    switch (self.colorSegmentedControl.selectedSegmentIndex) {
+        case 0: //Tint Color
+            view = [self viewForColor:self.graphView.tintColor];
+            break;
+        case 1: //Bar Color
+            view = [self viewForColor:self.graphView.indicatorColor];
+            break;
+        default: //Fill Color
+            view = [self viewForColor:self.graphView.fillColor];
+            break;
+    }
+    [self selectView:view];
+}
+
+- (UIView *)viewForColor:(UIColor *)color
+{
+    UIView *retVal = nil;
+    
+    if (!color || [color isEqual:[UIColor clearColor]])
+    {
+        retVal = self.clearColorButton;
+    }
+    else
+    {
+        NSArray *views = @[self.redColorButton, self.orangeColorButton, self.yellowColorButton, self.greenColorButton, self.blueColorButton, self.purpleColorButton];
+        for (UIView *view in views)
+        {
+            if ([view.backgroundColor isEqual:color])
+            {
+                retVal = view;
+                break;
+            }
+        }
+        
+        if (!retVal)
+        {
+            retVal = self.defaultColorButton;
+        }
+    }
+    
+    return retVal;
+}
+
+- (void)selectView:(UIView *)view
+{
+    [self.colorSelectionView removeFromSuperview];
+    [self.view insertSubview:self.colorSelectionView belowSubview:self.defaultColorButton];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.colorSelectionView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeHeight multiplier:1.0f constant:2.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.colorSelectionView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeWidth multiplier:1.0f constant:2.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.colorSelectionView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterX multiplier:1.0f constant:0.0f]];
+    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:self.colorSelectionView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:view attribute:NSLayoutAttributeCenterY multiplier:1.0f constant:0.0f]];
+
+}
 
 - (void)updateStartAngleLabel
 {
