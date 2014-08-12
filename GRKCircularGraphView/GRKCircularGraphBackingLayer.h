@@ -22,11 +22,15 @@
 /**
  *  The color used to draw the border.
  */
-@property (nonatomic) CGColorRef color;
+@property (nonatomic,assign) CGColorRef color;
 /**
  *  The thickness of the border to draw.
  *  This defaults to 1.0.
  */
-@property (nonatomic) CGFloat borderThickness;
+@property (nonatomic,assign) CGFloat borderThickness;
+/**
+ *  The color to use to fill the circle background.
+ */
+@property (nonatomic,assign) CGColorRef fillColor;
 
 @end

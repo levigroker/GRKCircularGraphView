@@ -22,7 +22,7 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
 
 @implementation GRKCircularGraphBackingLayer
 
-@dynamic color, borderThickness;
+@dynamic color, fillColor, borderThickness;
 
 #pragma mark - Class Level
 
@@ -31,7 +31,7 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
     static NSSet *keys = nil;
     if (!keys)
     {
-        keys = [NSSet setWithObjects:@"color", @"borderThickness", @"bounds", nil];
+        keys = [NSSet setWithObjects:@"color", @"fillColor", @"borderThickness", @"bounds", nil];
     }
     
     return keys;
@@ -68,6 +68,7 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
         //Copy custom property values into our new instance from the given layer
         GRKCircularGraphBackingLayer *baseLayer = (GRKCircularGraphBackingLayer *)layer;
         self.color = baseLayer.color;
+        self.fillColor = baseLayer.fillColor;
         self.borderThickness = baseLayer.borderThickness;
     }
     return self;
@@ -113,7 +114,9 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
         CGContextSetLineWidth(context, self.borderThickness);
         CGContextSetStrokeColorWithColor(context, self.color);
         CGContextAddPath(context, path.CGPath);
-        CGContextStrokePath(context);
+        CGContextSetFillColorWithColor(context, self.fillColor);
+        CGPathDrawingMode drawingMode = self.fillColor ? kCGPathFillStroke : kCGPathStroke;
+        CGContextDrawPath(context, drawingMode);
     }
 }
 
