@@ -165,6 +165,16 @@
     self.backingLayer.borderThickness = borderThickness;
 }
 
+- (UIColor *)fillColor
+{
+    return [UIColor colorWithCGColor:self.backingLayer.fillColor];
+}
+
+- (void)setFillColor:(UIColor *)fillColor
+{
+    self.backingLayer.fillColor = [fillColor CGColor];
+}
+
 - (CGFloat)startAngle
 {
     return self.graphLayer.startAngle;

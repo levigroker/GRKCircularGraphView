@@ -60,6 +60,10 @@
  */
 @property (nonatomic) CGFloat borderThickness;
 /**
+ *  The color to use to fill the circle background (can be `nil`).
+ */
+@property (nonatomic,strong) UIColor *fillColor;
+/**
  *  The "zero" position of our graph indicator.
  *  This is the radian value where zero is the horizontal axis on the right hand side ("3 o'clock').
  *  Defaults to `M_PI_2 * 3` (12:00 o'clock)
