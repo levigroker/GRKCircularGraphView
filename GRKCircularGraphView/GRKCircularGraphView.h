@@ -77,4 +77,9 @@
  */
 @property (nonatomic,assign) BOOL clockwise;
 
+/**
+ * Immediately stops any in-progress animation for the `percent` property.
+ */
+- (void)stopAnimation;
+
 @end

@@ -195,6 +195,13 @@
     self.graphLayer.clockwise = clockwise;
 }
 
+#pragma mark - Implementation
+
+- (void)stopAnimation
+{
+    [self.graphLayer removeAnimationForKey:@"percent"];
+}
+
 #pragma mark - Overrides
 
 - (void)tintColorDidChange
