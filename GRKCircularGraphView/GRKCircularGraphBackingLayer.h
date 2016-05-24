@@ -29,6 +29,11 @@
  */
 @property (nonatomic,assign) CGFloat borderThickness;
 /**
+ *  A radial offset to draw border at. Negative values shrink the radius.
+ *  This defaults to 0.0.
+ */
+@property (nonatomic,assign) CGFloat borderOffset;
+/**
  *  The color to use to fill the circle background.
  */
 @property (nonatomic,assign) CGColorRef fillColor;
