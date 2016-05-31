@@ -38,11 +38,11 @@ can be found in the `GRKCircularGraphViewTestApp` source.
   Please see the included LICENSE.txt for complete details.
 
 #### About
-A professional iOS engineer by day, my name is Levi Brown. Authoring a technical blog
+
+A professional iOS engineer by day, my name is Levi Brown. Authoring a blog
 [grokin.gs](http://grokin.gs), I am reachable via:
 
 Twitter [@levigroker](https://twitter.com/levigroker)  
-App.net [@levigroker](https://alpha.app.net/levigroker)  
 Email [levigroker@gmail.com](mailto:levigroker@gmail.com)  
 
 Your constructive comments and feedback are always welcome.
