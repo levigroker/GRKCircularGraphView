@@ -22,7 +22,7 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
 
 @implementation GRKCircularGraphBackingLayer
 
-@dynamic color, fillColor, borderThickness;
+@dynamic color, fillColor, borderThickness, borderOffset;
 
 #pragma mark - Class Level
 
@@ -31,7 +31,7 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
     static NSSet *keys = nil;
     if (!keys)
     {
-        keys = [NSSet setWithObjects:@"color", @"fillColor", @"borderThickness", @"bounds", nil];
+        keys = [NSSet setWithObjects:@"color", @"fillColor", @"borderThickness", @"borderOffset", @"bounds", nil];
     }
     
     return keys;
@@ -70,6 +70,7 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
         self.color = baseLayer.color;
         self.fillColor = baseLayer.fillColor;
         self.borderThickness = baseLayer.borderThickness;
+		self.borderOffset = baseLayer.borderOffset;
     }
     return self;
 }
@@ -107,7 +108,7 @@ static CGFloat const kDefaultBorderThickness = 1.0f;
         //The radius (minimum of center.x and center.y so we will not draw out of bounds)
         CGFloat radius = MIN(center.y, center.x);
         //Adjust the radius for the line width (again so we don't draw out of bounds)
-        radius -= self.borderThickness / 2.0f;
+        radius -= (self.borderThickness / 2.0f) - self.borderOffset;
         
         UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:center radius:radius startAngle:0.0f endAngle:2.0f * M_PI clockwise:YES];
         

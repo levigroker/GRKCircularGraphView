@@ -165,6 +165,16 @@
     self.backingLayer.borderThickness = borderThickness;
 }
 
+- (CGFloat)borderOffset
+{
+	return self.backingLayer.borderOffset;
+}
+
+- (void)setBorderOffset:(CGFloat)borderOffset
+{
+	self.backingLayer.borderOffset = borderOffset;
+}
+
 - (UIColor *)fillColor
 {
     return [UIColor colorWithCGColor:self.backingLayer.fillColor];
