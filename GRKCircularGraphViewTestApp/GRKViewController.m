@@ -9,7 +9,7 @@
 #import "GRKViewController.h"
 #import "GRKCircularGraphView.h"
 
-@interface GRKViewController ()
+@interface GRKViewController () <UITextFieldDelegate>
 
 @property (nonatomic,weak) IBOutlet GRKCircularGraphView *graphView;
 
@@ -32,6 +32,7 @@
 @property (nonatomic,weak) IBOutlet UIButton *blueColorButton;
 @property (nonatomic,weak) IBOutlet UIButton *purpleColorButton;
 @property (nonatomic,weak) IBOutlet UISegmentedControl *colorSegmentedControl;
+@property (nonatomic,weak) IBOutlet UITextField *borderOffsetTextField;
 
 @property (nonatomic,weak) IBOutlet NSLayoutConstraint *widthConstraint;
 @property (nonatomic,weak) IBOutlet NSLayoutConstraint *heightConstraint;
@@ -47,6 +48,7 @@
 - (IBAction)useTinitColorSwitchValueChanged:(UISwitch *)sender;
 - (IBAction)colorAction:(UIButton *)sender;
 - (IBAction)colorSegmentedContrtolValueChanged:(UISegmentedControl *)sender;
+- (IBAction)backgroundTapAction:(id)sender;
 
 @end
 
@@ -89,6 +91,7 @@
     [self widthSliderValueChanged:self.widthSlider];
     [self heightSliderValueChanged:self.heightSlider];
     [self updateSelectedColor];
+    [self updateBorderOffset];
 }
 
 #pragma mark - Actions
@@ -166,6 +169,29 @@
     [self updateSelectedColor];
 }
 
+- (IBAction)backgroundTapAction:(id)sender
+{
+    [self.view endEditing:YES];
+}
+
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    [self updateBorderOffset];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [self.view endEditing:YES];
+    return YES;
+}
+
 #pragma mark - Helpers
 
 - (void)updateSelectedColor
@@ -238,6 +264,14 @@
 - (void)updateDimensionsLabel
 {
     self.dimensionsLabel.text = [NSString stringWithFormat:@"%.1f x %.1f", self.widthConstraint.constant, self.heightConstraint.constant];
+}
+
+- (void)updateBorderOffset
+{
+    NSString *text = self.borderOffsetTextField.text;
+    CGFloat offset = [text floatValue];
+    self.graphView.borderOffset = offset;
+    self.borderOffsetTextField.text = [NSString stringWithFormat:@"%.1f", offset];
 }
 
 @end
