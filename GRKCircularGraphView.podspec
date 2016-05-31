@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GRKCircularGraphView"
-  s.version      = "1.1.1"
+  s.version      = "1.2"
   s.summary      = "Renders a one-item circular bar graph with an animatable percentage property and configurable orientation, colors, etc."
   s.description  = <<-DESC
 		A UIView subclass which renders a one-item circular bar graph with an animatable
@@ -15,5 +15,4 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '7.1'
   s.ios.deployment_target = '7.0'
   s.source_files = 'GRKCircularGraphView/**/*.{h,m}'
-  s.requires_arc = true
 end
