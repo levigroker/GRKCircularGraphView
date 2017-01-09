@@ -7,7 +7,7 @@
 //
 
 #import "GRKViewController.h"
-#import "GRKCircularGraphView.h"
+#import <GRKCircularGraphView/GRKCircularGraphView.h>
 
 @interface GRKViewController () <UITextFieldDelegate>
 
