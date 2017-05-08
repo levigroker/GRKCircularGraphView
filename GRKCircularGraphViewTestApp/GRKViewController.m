@@ -49,6 +49,7 @@
 - (IBAction)colorAction:(UIButton *)sender;
 - (IBAction)colorSegmentedContrtolValueChanged:(UISegmentedControl *)sender;
 - (IBAction)backgroundTapAction:(id)sender;
+- (IBAction)graphTapAction:(id)sender;
 
 @end
 
@@ -172,6 +173,16 @@
 - (IBAction)backgroundTapAction:(id)sender
 {
     [self.view endEditing:YES];
+}
+
+- (IBAction)graphTapAction:(id)sender
+{
+	UIAlertController *alert = [UIAlertController alertControllerWithTitle:NSLocalizedString(@"Test Alert", @"Test alert title") message:NSLocalizedString(@"This is just a test alert.", @"Test alert message") preferredStyle:UIAlertControllerStyleAlert];
+	
+	UIAlertAction *dismissAction = [UIAlertAction actionWithTitle:@"Dismiss" style:UIAlertActionStyleDefault handler:nil];
+	[alert addAction:dismissAction];
+	
+	[self presentViewController:alert animated:YES completion:nil];
 }
 
 #pragma mark - UITextFieldDelegate
