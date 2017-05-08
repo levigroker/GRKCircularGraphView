@@ -1,0 +1,6 @@
+framework module GRKCircularGraphView {
+  umbrella header "GRKCircularGraphView-umbrella.h"
+
+  export *
+  module * { export * }
+}

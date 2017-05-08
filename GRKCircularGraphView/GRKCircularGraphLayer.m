@@ -93,7 +93,7 @@ static CGFloat const kDefaultIndicatorThickness = 10.0f;
 - (void)setup
 {
     //Set ourself as our delegate so we can prevent implicit animations of properties we don't want to animate.
-    self.delegate = self;
+    self.delegate = (id<CALayerDelegate>)self;
     //Defaults
     self.mediaTimingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     self.animationDuration = kGRKDefaultAnimationDuration;

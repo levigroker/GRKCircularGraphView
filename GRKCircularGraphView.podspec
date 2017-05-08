@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "GRKCircularGraphView"
-  s.version      = "1.3"
+  s.version      = "2.0"
   s.summary      = "Renders a one-item circular bar graph with an animatable percentage property and configurable orientation, colors, etc."
   s.description  = <<-DESC
 		A UIView subclass which renders a one-item circular bar graph with an animatable
@@ -8,7 +8,7 @@ Pod::Spec.new do |s|
 		for drawing efficiency and implicit animation.
     DESC
   s.homepage     = "https://github.com/levigroker/GRKCircularGraphView"
-  s.license      = 'Creative Commons Attribution 4.0 Unported License'
+  s.license      = 'Creative Commons Attribution 4.0 International License'
   s.author       = { "Levi Brown" => "levigroker@gmail.com" }
   s.social_media_url = 'https://twitter.com/levigroker'
   s.source       = { :git => "https://github.com/levigroker/GRKCircularGraphView.git", :tag => s.version.to_s }
