@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DB1452201EC1222200E88D0F /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DB14521F1EC1222200E88D0F /* Launch Screen.storyboard */; };
 		DBC09F5F19929E5F00475E89 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC09F5E19929E5F00475E89 /* Foundation.framework */; };
 		DBC09F6119929E5F00475E89 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC09F6019929E5F00475E89 /* CoreGraphics.framework */; };
 		DBC09F6319929E5F00475E89 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC09F6219929E5F00475E89 /* UIKit.framework */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DB14521F1EC1222200E88D0F /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		DBC09F5B19929E5F00475E89 /* GRKCircularGraphViewTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GRKCircularGraphViewTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBC09F5E19929E5F00475E89 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		DBC09F6019929E5F00475E89 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -129,6 +131,7 @@
 				DBC09F7419929E5F00475E89 /* GRKViewController.m */,
 				DBC09F7619929E5F00475E89 /* Images.xcassets */,
 				DBC09F6519929E5F00475E89 /* Supporting Files */,
+				DB14521F1EC1222200E88D0F /* Launch Screen.storyboard */,
 			);
 			path = GRKCircularGraphViewTestApp;
 			sourceTree = "<group>";
@@ -254,6 +257,7 @@
 			files = (
 				DBC09F7719929E5F00475E89 /* Images.xcassets in Resources */,
 				DBC09F6919929E5F00475E89 /* InfoPlist.strings in Resources */,
+				DB1452201EC1222200E88D0F /* Launch Screen.storyboard in Resources */,
 				DBC09F7219929E5F00475E89 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -361,7 +365,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -393,7 +397,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
