@@ -8,3 +8,4 @@
         * Fixed test project warnings.
         * Updated test project UI for iOS 9 and larger screen size.
         * Updated license.
+2.0.1 - 2020/10/27 @levigroker - Minimum deployment version bump to silence Xcode 12 warnings.
